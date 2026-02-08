@@ -5,6 +5,7 @@
   font-family: "Poppins", sans-serif;
 }
 
+
 body {
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   min-height: 100vh;
@@ -16,12 +17,13 @@ body {
 /* MAIN CARD */
 .container {
   background: #fff;
-  padding: 30px 22px;
+  padding: 28px 20px;
   border-radius: 20px;
-  width: 92%;
+  width: 90%;
   max-width: 420px;
   text-align: center;
   box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+  overflow: hidden;   /* 🔥 IMPORTANT FIX */
 }
 
 /* HEADINGS */
@@ -51,6 +53,7 @@ input {
 /* BUTTONS */
 button {
   width: 100%;
+  max-width: 100%;
   padding: 16px;
   border: none;
   border-radius: 30px;
@@ -60,7 +63,9 @@ button {
   font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
+  display: block;
 }
+
 
 button:hover {
   background: #ff4d6d;
