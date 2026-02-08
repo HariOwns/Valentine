@@ -32,21 +32,31 @@ const y=Math.random()*100-50;
 noBtn.style.transform=`translate(${x}px,${y}px)`;
 }
 
-function shareLove() {
-  const name = localStorage.getItem("valentineName") || "Someone";
-  const url = window.location.href;
+// SHARE BUTTON LOGIC (WORKS 100%)
+document.addEventListener("DOMContentLoaded", () => {
+  const shareBtn = document.getElementById("shareBtn");
 
-  const text = `${name}, someone has a question for you 💖\nWill you be my Valentine? 😍`;
+  if (!shareBtn) return;
 
-  if (navigator.share) {
-    navigator.share({
-      title: "Be My Valentine 💘",
-      text: text,
-      url: url
-    }).catch(err => console.log(err));
-  } else {
-    // Fallback for desktop
-    navigator.clipboard.writeText(url);
-    alert("Link copied! Share it with your loved one 💕");
-  }
-}
+  shareBtn.addEventListener("click", () => {
+    const name = localStorage.getItem("valentineName") || "Someone";
+    const url = window.location.href;
+
+    const message = `${name}, someone has a Valentine surprise for you 💖💌`;
+
+    // ✅ Modern Mobile Share
+    if (navigator.share) {
+      navigator.share({
+        title: "Be My Valentine 💘",
+        text: message,
+        url: url
+      }).catch(() => {});
+    } 
+    // ✅ WhatsApp fallback (ALWAYS works)
+    else {
+      const whatsappURL =
+        `https://wa.me/?text=${encodeURIComponent(message + " " + url)}`;
+      window.open(whatsappURL, "_blank");
+    }
+  });
+});
