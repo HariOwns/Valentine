@@ -31,3 +31,22 @@ const x=Math.random()*200-100;
 const y=Math.random()*100-50;
 noBtn.style.transform=`translate(${x}px,${y}px)`;
 }
+
+function shareLove() {
+  const name = localStorage.getItem("valentineName") || "Someone";
+  const url = window.location.href;
+
+  const text = `${name}, someone has a question for you 💖\nWill you be my Valentine? 😍`;
+
+  if (navigator.share) {
+    navigator.share({
+      title: "Be My Valentine 💘",
+      text: text,
+      url: url
+    }).catch(err => console.log(err));
+  } else {
+    // Fallback for desktop
+    navigator.clipboard.writeText(url);
+    alert("Link copied! Share it with your loved one 💕");
+  }
+}
